@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Androider</string>
+    <string name="home_page_name">首页</string>
+    <string name="play_page_name">逗趣</string>
+    <string name="discover_page_name">发现</string>
+    <string name="mine_page_name">我的</string>
+    <string name="navigation_drawer_open">open drawer</string>
+    <string name="navigation_drawer_close">close drawer</string>
+    <string name="action_share">分享</string>
+</resources>

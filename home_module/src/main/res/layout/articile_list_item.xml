@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/article_item_bg_corner"
+        android:orientation="vertical">
+
+        <com.ryan.core.widget.RyanCornerImageView
+            android:id="@+id/rciv_article_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="分享人：鸿洋 分类： Java深入 / 字节码 "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="3dp"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Java | Object obj = new Object()占用多少字节？"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="时间：1天前"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

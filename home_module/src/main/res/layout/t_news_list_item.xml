@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.ryan.core.widget.RyanCornerImageView
+        android:id="@+id/iv_author"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_margin="3dp"
+        android:background="@color/themeYellow"
+        android:src="@drawable/public_cxmy" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="沉香末影"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="normal" />
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="3dp"-->
+    <!--        android:orientation="vertical">-->
+    <!--    </LinearLayout>-->
+
+</LinearLayout>

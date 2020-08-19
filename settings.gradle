@@ -1,0 +1,8 @@
+rootProject.name='Androider'
+include ':app'
+include ':lib_core'
+include ':home_module'
+include ':play_module'
+include ':discover_module'
+include ':mine_module'
+include ':lib_net'

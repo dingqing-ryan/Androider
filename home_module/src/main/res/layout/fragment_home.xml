@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ryan.home.vm.HomeViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/themeYellow"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/theme_bg_corner"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_menu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="2dp"
+                            android:padding="3dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/nav_bar_list_more" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="left"
+                            android:padding="3dp"
+                            android:text="Android"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/add" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bannerbg_corner"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="6dp"
+                        android:background="@drawable/search_bg_corner"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_search"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableStart="@drawable/nav_bar_dark_search"
+                            android:drawablePadding="8dp"
+                            android:gravity="center|left"
+                            android:hint="请输入你感兴趣的内容..."
+                            android:padding="5dp"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_search"
+                            android:layout_width="80dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/search_btn_bg_corner"
+                            android:gravity="center"
+                            android:text="搜索"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                        android:id="@+id/my_srl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/bg_color"
+                        app:srlEnableLoadMore="true">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.ryan.core.widget.banner.Banner
+                                    android:id="@+id/banner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="180dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:layout_marginTop="6dp"
+                                    app:image_scale_type="center_crop"
+                                    app:title_textcolor="@color/white" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rv_public"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="3dp"
+                                    android:orientation="horizontal" />
+
+                                <com.yunlei.hindicator.widget.HIndicator
+                                    android:id="@+id/indicator"
+                                    android:layout_width="50dp"
+                                    android:layout_height="5dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginBottom="5dp"
+                                    app:hi_bgColor="@color/white"
+                                    app:hi_indicatorColor="@color/themeYellow" />
+
+                                <com.ryan.core.widget.WrapContentListView
+                                    android:id="@+id/lv_article"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:divider="@null" />
+                            </LinearLayout>
+                        </ScrollView>
+                    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--侧滑菜单-->
+        <LinearLayout
+            android:id="@+id/ll_left_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_left_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:scaleType="center"
+                android:src="@drawable/test" />
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
