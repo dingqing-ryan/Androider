@@ -1,18 +1,16 @@
 package com.ryan.home.fragment
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ryan.core.activity.WebViewActivity
 import com.ryan.core.activity.WebViewActivity.WEB_URL
 import com.ryan.core.base.mvvm.BaseFragment
 import com.ryan.core.helper.GlideImageLoader
+import com.ryan.core.helper.ItemClickListener
 import com.ryan.core.widget.banner.BannerConfig
 import com.ryan.core.widget.banner.transformer.Transformer.ZoomOutSlide
 import com.ryan.home.R
@@ -33,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  *
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), View.OnClickListener,
+    ItemClickListener<TNewsBean>,
     OnRefreshListener, OnLoadMoreListener,
     ArticleListAdapter.ItemClickListener {
 
@@ -78,6 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), View.On
         mBinding.mySrl.autoRefresh()
         mBinding.lvArticle.adapter = mViewModel.articleListAdapter
         mBinding.rvPublic.adapter = mViewModel.tNewsAdapter
+        mViewModel.tNewsAdapter?.setItemClickListener(this)
         val staggerManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL)
         mBinding.rvPublic.layoutManager = staggerManager
         mBinding.indicator.bindRecyclerView(mBinding.rvPublic)
@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), View.On
      * 初始化Banner样式
      */
     private fun initBanner() {
-        mBinding.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR)
+        mBinding.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
             ?.setImageLoader(GlideImageLoader())
             ?.setBannerAnimation(ZoomOutSlide)
             ?.isAutoPlay(true)
@@ -141,5 +141,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), View.On
         val intent = Intent(context, WebViewActivity::class.java)
         intent.putExtra(WEB_URL, url)
         context?.startActivity(intent)
+    }
+
+    override fun onClick(data: TNewsBean) {
+        startActivity(WebViewActivity::class.java)
     }
 }

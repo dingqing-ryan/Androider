@@ -1,4 +1,4 @@
-package com.yunlei.hindicator.widget
+package com.ryan.core.widget
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -14,14 +14,17 @@ import com.ryan.core.R
 
 
 /**
- * 做了基于recyclerView的联动[bindRecyclerView]，其余的需要自己适配
+ * 做了基于recyclerView的联动[bindRecyclerView]
  *
  * @Author: Ryan
  * @Date: 2020/8/10 9:21
  * @Description:  横向滑动的指示器
  */
-class HIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : View(context, attrs, defStyleAttr) {
+class RecycleIndicator @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
     private val mBgPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mBgRect: RectF = RectF()
@@ -36,6 +39,7 @@ class HIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet
             field = value
             invalidate()
         }
+
     var progress: Float = 0f    //滑动进度比例
         set(value) {
             field = value
@@ -43,16 +47,17 @@ class HIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
     init {
-        val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.HIndicator)
-        mBgColor = typedArray.getColor(R.styleable.HIndicator_hi_bgColor, mBgColor)
-        mIndicatorColor = typedArray.getColor(R.styleable.HIndicator_hi_indicatorColor, mIndicatorColor)
+        val typedArray: TypedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.RecycleIndicator)
+        mBgColor = typedArray.getColor(R.styleable.RecycleIndicator_bgColor, mBgColor)
+        mIndicatorColor =
+            typedArray.getColor(R.styleable.RecycleIndicator_indicatorColor, mIndicatorColor)
         typedArray.recycle()
 
         mBgPaint.color = mBgColor
         mBgPaint.style = Paint.Style.FILL
         mPaint.color = mIndicatorColor
         mPaint.style = Paint.Style.FILL
-
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -91,7 +96,7 @@ class HIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val range = recyclerView.computeHorizontalScrollRange()
                 val extend = recyclerView.computeHorizontalScrollExtent()
                 val progress: Float = offsetX * 1.0f / (range - extend)
-                this@HIndicator.progress = progress     //设置滚动距离所占比例
+                this@RecycleIndicator.progress = progress //设置滚动距离所占比例
             }
         })
 
@@ -99,7 +104,7 @@ class HIndicator @JvmOverloads constructor(context: Context, attrs: AttributeSet
             val range = recyclerView.computeHorizontalScrollRange()
             val extend = recyclerView.computeHorizontalScrollExtent()
             val ratio = extend * 1f / range
-            this@HIndicator.ratio = ratio       //设置指示器所占的长度比例
+            this@RecycleIndicator.ratio = ratio       //设置指示器所占的长度比例
         }
     }
 

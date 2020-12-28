@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.ryan.lib_net.bean.ArticleBean
 import com.ryan.core.widget.RyanCornerImageView
 import com.ryan.home.R
+import com.ryan.lib_net.bean.ArticleBean
 
 /**
  * @Author: Ryan
@@ -23,7 +23,6 @@ class ArticleListAdapter(dl: List<ArticleBean>, mContext: Context) : BaseAdapter
     private var mViewHolder: MyViewHolder? = null
     private var mContext: Context? = null
     private var itemClickListener: ItemClickListener? = null
-
 
     init {
         articles = dl
@@ -57,7 +56,11 @@ class ArticleListAdapter(dl: List<ArticleBean>, mContext: Context) : BaseAdapter
         }
 
         if (articles?.size != 0) {
-            mViewHolder?.tvTitle?.text = articles!![position].shareUser + "    文章分类：" + articles!![position].superChapterName
+            if (articles!![position].shareUser.isEmpty()) {
+                articles!![position].shareUser = "未署名"
+            }
+            mViewHolder?.tvTitle?.text =
+                "：" + articles!![position].shareUser + "      分类│来源：" + articles!![position].superChapterName
             mViewHolder?.tvContent?.text = articles!![position].title + articles!![position].desc
             mViewHolder?.tvTime?.text = articles!![position].niceShareDate
             if (articles!![position].envelopePic.isNotEmpty()) {

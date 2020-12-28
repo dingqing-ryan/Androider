@@ -30,9 +30,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:background="@drawable/theme_bg_corner"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="5dp">
 
                     <LinearLayout
                         android:id="@+id/ll_menu"
@@ -77,8 +78,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/bannerbg_corner"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -97,28 +96,29 @@
                             android:layout_weight="1"
                             android:background="@null"
                             android:drawableStart="@drawable/nav_bar_dark_search"
+                            android:drawableEnd="@drawable/d_scan"
                             android:drawablePadding="8dp"
-                            android:gravity="center|left"
+                            android:gravity="start|center"
                             android:hint="请输入你感兴趣的内容..."
-                            android:padding="5dp"
+                            android:padding="10dp"
                             android:textSize="13sp" />
 
-                        <TextView
-                            android:id="@+id/tv_search"
-                            android:layout_width="80dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/search_btn_bg_corner"
-                            android:gravity="center"
-                            android:text="搜索"
-                            android:textColor="@color/black" />
+                        <!--                        <TextView-->
+                        <!--                            android:id="@+id/tv_search"-->
+                        <!--                            android:layout_width="80dp"-->
+                        <!--                            android:layout_height="35dp"-->
+                        <!--                            android:layout_gravity="center"-->
+                        <!--                            android:background="@drawable/search_btn_bg_corner"-->
+                        <!--                            android:gravity="center"-->
+                        <!--                            android:text="搜索"-->
+                        <!--                            android:textColor="@color/black" />-->
                     </LinearLayout>
 
                     <com.scwang.smartrefresh.layout.SmartRefreshLayout
                         android:id="@+id/my_srl"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/bg_color"
+                        android:background="@color/themeYellow"
                         app:srlEnableLoadMore="true">
 
                         <ScrollView
@@ -135,28 +135,61 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="180dp"
                                     android:layout_marginStart="10dp"
+                                    android:layout_marginTop="6dp"
                                     android:layout_marginEnd="10dp"
                                     android:layout_marginBottom="6dp"
-                                    android:layout_marginTop="6dp"
                                     app:image_scale_type="center_crop"
                                     app:title_textcolor="@color/white" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left|center"
+                                    android:layout_marginStart="10dp"
+                                    android:drawableStart="@drawable/d_ku"
+                                    android:drawablePadding="1dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text=" 达人博客  "
+                                    android:drawableEnd="@drawable/title_slogan"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/rv_public"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:layout_margin="3dp"
-                                    android:orientation="horizontal" />
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/bannerbg_corner"
+                                    android:orientation="horizontal"
+                                    android:padding="5dp" />
 
-                                <com.yunlei.hindicator.widget.HIndicator
+                                <com.ryan.core.widget.RecycleIndicator
                                     android:id="@+id/indicator"
-                                    android:layout_width="50dp"
+                                    android:layout_width="35dp"
                                     android:layout_height="5dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginBottom="5dp"
-                                    app:hi_bgColor="@color/white"
-                                    app:hi_indicatorColor="@color/themeYellow" />
+                                    app:bgColor="@color/white"
+                                    app:indicatorColor="@color/black" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left|center"
+                                    android:layout_marginStart="10dp"
+                                    android:drawableStart="@drawable/d_liubixue"
+                                    android:drawablePadding="1dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text=" 优选文章   "
+                                    android:textColor="@color/black"
+                                    android:drawableEnd="@drawable/title_slogan2"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
 
                                 <com.ryan.core.widget.WrapContentListView
                                     android:id="@+id/lv_article"

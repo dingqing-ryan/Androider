@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="HIndicator">
-        <attr name="hi_bgColor" format="color" />
-        <attr name="hi_indicatorColor" format="color" />
+    <declare-styleable name="RecycleIndicator">
+        <attr name="bgColor" format="color" />
+        <attr name="indicatorColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="Banner">

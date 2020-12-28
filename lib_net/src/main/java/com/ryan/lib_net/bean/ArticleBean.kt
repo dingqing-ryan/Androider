@@ -29,7 +29,7 @@ data class ArticleBean(
     val realSuperChapterId: Int,
     val selfVisible: Int,
     val shareDate: Long,
-    val shareUser: String,
+    var shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,
     val tags: List<Tag>,

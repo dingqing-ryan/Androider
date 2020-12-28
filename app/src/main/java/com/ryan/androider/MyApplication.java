@@ -32,7 +32,7 @@ public class MyApplication  extends Application {
                 ClassicsHeader header = new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Scale);
                 header.setEnableLastTime(false);
                 ClassicsHeader.REFRESH_HEADER_FINISH = "数据已刷新(●´∞`●)";
-                header.setPrimaryColorId(R.color.bg_color);
+                header.setPrimaryColorId(R.color.themeYellow);
                 header.setAccentColorId(R.color.black);
                 header.setTextSizeTime(25);
                 header.setTextSizeTitle(14);
@@ -47,8 +47,8 @@ public class MyApplication  extends Application {
             public RefreshFooter createRefreshFooter(@NonNull Context context, @NonNull RefreshLayout layout) {
                 layout.setEnableLoadMoreWhenContentNotFull(true);//内容不满一页时候启用加载更多
                 BallPulseFooter footer = new BallPulseFooter(context);
-                footer.setAnimatingColor(Color.YELLOW);
-                footer.setNormalColor(Color.YELLOW);
+                footer.setAnimatingColor(Color.BLACK);
+                footer.setNormalColor(Color.BLACK);
                 footer.setBackgroundResource(android.R.color.transparent);
                 footer.setSpinnerStyle(SpinnerStyle.Scale);//设置为拉伸模式
                 return footer;//指定为经典Footer，默认是 BallPulseFooter

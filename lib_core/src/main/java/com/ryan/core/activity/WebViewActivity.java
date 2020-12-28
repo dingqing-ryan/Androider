@@ -12,12 +12,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.ryan.core.R;
 import com.ryan.core.utils.QMUIStatusBarHelper;
@@ -29,6 +30,8 @@ import com.ryan.core.utils.StatusBarUtil;
  * @Description: 网页加载Activity
  */
 public class WebViewActivity extends AppCompatActivity {
+    private TextView tvTitle;
+    private ImageView backImg;
     private WebView webView;
     private ProgressBar progressBar;
     public static String WEB_URL = "web_url";
@@ -41,7 +44,10 @@ public class WebViewActivity extends AppCompatActivity {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
         progressBar = (ProgressBar) findViewById(R.id.progressbar);//进度条
         webView = (WebView) findViewById(R.id.webview);
-//        webView.loadUrl("file:///android_asset/test.html");//加载asset文件夹下html
+        backImg = findViewById(R.id.iv_back);
+        tvTitle = findViewById(R.id.tv_title);
+        backImg.setOnClickListener(v -> finish());
+        initWebView();
         Intent intent = getIntent();
         if (intent != null) {
             String url = getIntent().getStringExtra(WEB_URL);
@@ -50,17 +56,37 @@ public class WebViewActivity extends AppCompatActivity {
             Toast.makeText(this, "找不到对应的网页资源", Toast.LENGTH_SHORT).show();
             finish();
         }
-//       使用webview显示html代码
-//        webView.loadDataWithBaseURL(null,"<html><head><title> 欢迎您 </title></head>" +
-//        "<body><h2>使用webview显示 html代码</h2></body></html>", "text/html" , "utf-8", null);
+    }
+
+    /**
+     * 初始化WebView设置
+     */
+    private void initWebView() {
 
         webView.addJavascriptInterface(this, "android");//添加js监听 这样html就能调用客户端
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
+        //是否可以后退
+        webView.canGoBack();
+        //是否可以前进
+        webView.canGoForward();
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
+        //设置自适应屏幕，两者合用
+        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        //缩放操作
+        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
+        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
+        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
 
+        //其他细节操作
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据
+        webSettings.setAllowFileAccess(true); //设置可以访问文件
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+        webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
+        webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
          * LOAD_DEFAULT: （默认）根据cache-control决定是否从网络上取数据。
@@ -72,9 +98,22 @@ public class WebViewActivity extends AppCompatActivity {
         //支持屏幕缩放
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
+    }
 
-        //不显示webview缩放按钮
-//        webSettings.setDisplayZoomControls(false);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //激活WebView为活跃状态，能正常执行网页的响应
+        webView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //激活WebView为活跃状态，能正常执行网页的响应
+        //当页面被失去焦点被切换到后台不可见状态，需要执行onPause
+        //通过onPause动作通知内核暂停所有的动作，比如DOM的解析、plugin的执行、JavaScript执行。
+        webView.onPause();
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
@@ -91,14 +130,13 @@ public class WebViewActivity extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            Log.i("ansen", "拦截url:" + url);
-            if (url.equals("http://www.google.com/")) {
-                Toast.makeText(WebViewActivity.this, "国内不能访问google,拦截该url", Toast.LENGTH_LONG).show();
-                return true;//表示我已经处理过了
+            if (!url.startsWith("http") || !url.startsWith("https")) {
+                Log.e("webview", url);
+                return true;
+            } else {
+                return false;
             }
-            return super.shouldOverrideUrlLoading(view, url);
         }
-
     };
 
     //WebChromeClient主要辅助WebView处理Javascript的对话框、网站图标、网站title、加载进度等
@@ -123,7 +161,7 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            Log.i("ansen", "网页标题:" + title);
+            tvTitle.setText(title);
         }
 
         //加载进度回调
@@ -135,7 +173,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.i("ansen", "是否有上一个页面:" + webView.canGoBack());
         if (webView.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {//点击返回按钮的时候判断有没有上一页
             webView.goBack(); // goBack()表示返回webView的上一页面
             return true;

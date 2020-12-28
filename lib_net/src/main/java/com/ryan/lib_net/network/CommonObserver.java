@@ -1,8 +1,9 @@
 package com.ryan.lib_net.network;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.ryan.core.base.mvvm.BaseViewModel;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -12,11 +13,12 @@ public abstract class CommonObserver<T> implements Observer<T> {
 
     private boolean isShowDialog;
     private int SUCCESS_CODE = 0;
-    private Context context;
-    private Disposable disposable;//没有继承BaseActivity的  需要手动解绑订阅 否则内存泄漏
 
-    public CommonObserver(Context context, boolean isShowDialog) {
-        this.context = context;
+    private Disposable disposable;//没有继承BaseActivity的  需要手动解绑订阅 否则内存泄漏
+    private BaseViewModel mViewModel;
+
+    public CommonObserver(BaseViewModel mViewModel, boolean isShowDialog) {
+        this.mViewModel = mViewModel;
         this.isShowDialog = isShowDialog;
 //        if (this.isShowDialog && dialog == null) {
 //            createLoading();
@@ -50,13 +52,13 @@ public abstract class CommonObserver<T> implements Observer<T> {
         if (t instanceof ResultModel) {
             ResultModel<T> bean = (ResultModel<T>) t;
             if (bean.getErrorCode() != SUCCESS_CODE) {
-                Toast.makeText(context, bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mViewModel.getApplication(), bean.getErrorMsg(), Toast.LENGTH_SHORT).show();
                 Log.e("请求失败----->", "错误码：" + bean.getErrorCode() + " ,错误信息：" + bean.getErrorMsg());
             }
         } else if (t instanceof ResultListModel) {
             ResultListModel<T> beans = (ResultListModel<T>) t;
             if (beans.getErrorCode() != SUCCESS_CODE) {
-                Toast.makeText(context, beans.getErrorMsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mViewModel.getApplication(), beans.getErrorMsg(), Toast.LENGTH_SHORT).show();
                 Log.e("请求失败----->", "错误码：" + beans.getErrorCode() + " ,错误信息：" + beans.getErrorMsg());
             }
         }
@@ -68,6 +70,8 @@ public abstract class CommonObserver<T> implements Observer<T> {
 //            dialog.show();
 //        }
         this.disposable = d;
+        //调用addSubscribe()添加Disposable，请求与View周期同步
+        mViewModel.addDisposable(d);
     }
 
     @Override

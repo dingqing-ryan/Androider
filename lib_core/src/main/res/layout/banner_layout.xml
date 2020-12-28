@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@+id/circleIndicator"
-            android:background="#44000000"
+            android:background="@drawable/banner_title_corner"
             android:orientation="horizontal"
             android:visibility="gone">
 

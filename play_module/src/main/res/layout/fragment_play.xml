@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ryan.playmodule.vm.PlayViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/play_page_name"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
-</LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/themeYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="选择图片" />
+        <!--        <com.google.android.material.tabs.TabLayout-->
+        <!--            android:id="@+id/tb_title"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:layout_gravity="start|center_horizontal"-->
+        <!--            android:background="@color/themeYellow"-->
+        <!--            android:padding="5dp"-->
+        <!--            app:tabBackground="@android:color/transparent"-->
+        <!--            app:tabIndicatorColor="@color/black"-->
+        <!--            app:tabMode="scrollable"-->
+        <!--            app:tabRippleColor="@android:color/transparent"-->
+        <!--            app:tabSelectedTextColor="#000"-->
+        <!--            app:tabTextColor="@color/text_default_color">-->
+
+        <!--            <com.google.android.material.tabs.TabItem-->
+        <!--                android:id="@+id/tabItem1"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:padding="5dp"-->
+        <!--                android:text="推荐" />-->
+
+        <!--            <com.google.android.material.tabs.TabItem-->
+        <!--                android:id="@+id/tabItem2"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:padding="5dp"-->
+        <!--                android:text="搞笑" />-->
+
+        <!--            <com.google.android.material.tabs.TabItem-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:padding="5dp"-->
+        <!--                android:text="干货" />-->
+
+        <!--        </com.google.android.material.tabs.TabLayout>-->
+
+
+        <!--        <com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+        <!--            android:id="@+id/my_srl"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:background="@color/themeYellow"-->
+        <!--            app:srlEnableLoadMore="true">-->
+
+
+        <!--        </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+    </LinearLayout>
+</layout>

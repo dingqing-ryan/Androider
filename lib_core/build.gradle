@@ -62,5 +62,15 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 
+    //network
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.11'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    //避免findviewid 插件已经初始化了 直接用控件名操作就可以了
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api "com.google.android.material:material:1.2.0"
 }

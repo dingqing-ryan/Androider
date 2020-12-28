@@ -24,9 +24,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+
 import com.ryan.core.helper.Listener;
 import com.ryan.core.utils.permission.PermissionsUtils;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+
 import static com.ryan.core.utils.ButtonUtils.isFastDoubleClick;
 
 
@@ -51,11 +53,12 @@ public class RootActivity extends RxAppCompatActivity {
     protected FrameLayout mLayoutContent;
 
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //固定屏幕方向
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
         orientation = mConfiguration.orientation; //获取屏幕方向
         mContext = this;

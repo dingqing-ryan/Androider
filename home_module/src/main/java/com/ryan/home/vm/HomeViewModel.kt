@@ -44,7 +44,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.onErrorReturn { t: Throwable -> ResultListModel(-1, t.message!!) }
             ?.subscribe(object :
-                CommonObserver<ResultListModel<BannerBean>?>(getApplication(), false) {
+                CommonObserver<ResultListModel<BannerBean>?>(this, false) {
                 override fun success(data: ResultListModel<BannerBean>?) {
                     if (data?.errorCode == 0) {
                         bannerData.value = data.data
@@ -72,7 +72,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.onErrorReturn { t -> ResultModel(-1, t.message!!) }
             ?.subscribe(object :
-                CommonObserver<ResultModel<ArticleListBean>?>(getApplication(), false) {
+                CommonObserver<ResultModel<ArticleListBean>?>(this, false) {
                 override fun success(data: ResultModel<ArticleListBean>?) {
                     if (data?.errorCode == 0) {
                         articleData.addAll(data.data?.datas!!)
@@ -96,7 +96,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.onErrorReturn { t: Throwable -> ResultListModel(-1, t.message!!) }
-            ?.subscribe(object : CommonObserver<ResultListModel<TNewsBean>?>(getApplication(), false) {
+            ?.subscribe(object : CommonObserver<ResultListModel<TNewsBean>?>(this, false) {
                 override fun success(data: ResultListModel<TNewsBean>?) {
                     if (data?.errorCode == 0) {
                         tNewsData.value = data.data
